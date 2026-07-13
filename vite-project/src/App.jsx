@@ -3,6 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
+import { getDatabase, ref, set } from "firebase/database";
+
 
 
 function App() {
@@ -10,7 +12,12 @@ function App() {
 
   const handleClick = (e) =>{
     e.preventDefault()
-  console.log(task)
+
+  const db = getDatabase();
+  set(ref(db, 'TodoName'), {
+    todoname:task
+    
+  });
   }
   
  
