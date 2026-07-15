@@ -37,6 +37,19 @@ transition: Zoom,
 });
 
 }
+const deletetask = () => 
+  toast.warn('it has been deleted successfully!', {
+position: "bottom-center",
+autoClose: 4984,
+hideProgressBar: false,
+closeOnClick: false,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "colored",
+transition: Zoom,
+});
+
 
   const [task, setTask] = useState("")
   const [AllTask, setAllTask] = useState([])
@@ -68,7 +81,10 @@ transition: Zoom,
   }, [])
    const handleDelete = (id) => {
     const db = getDatabase();
-    remove(ref(db, 'TodoName/' + id));
+    remove(ref(db, 'TodoName/' + id)).then(() => {
+      setTask("")
+      deletetask()
+    })
   }
 
   const handleEdit =  (id) => {
