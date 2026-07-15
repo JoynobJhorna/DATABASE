@@ -4,6 +4,10 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 import { getDatabase, ref, set, onValue, push } from "firebase/database";
+import { HiTrash } from "react-icons/hi";
+import { MdOutlineModeEdit } from "react-icons/md";
+
+
 
 
 
@@ -43,10 +47,18 @@ function App() {
           <input onChange={(e) => setTask(e.target.value)} type="text" className="input validator" placeholder="Email" required />
           <p className="validator-hint hidden">Required</p>
         </fieldset>
-        <button onClick={handleClick} className="btn btn-neutral mt-4" type="submit">submit</button>
+ 
+        <button onClick={handleClick} className="btn btn-neutral hover:bg-blue-100 hover:text-black
+         mt-4" type="submit">submit</button>
         <ul className = "bg-black text-white p-4">
           {AllTask.map((item) => (
-            <li className = "text-lg">{item.todoname}</li>
+            <li className = "text-lg flex justify-between">{item.todoname}
+             <div className = "flex gap-3">
+            <HiTrash className="text-red-500 hover:text-red-700" /> 
+            <MdOutlineModeEdit className = "text-green-500 hover:text-green-700"/>
+            </div>
+            </li>
+
             
           ))}
         </ul>
