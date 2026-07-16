@@ -6,7 +6,7 @@ import './App.css'
 import { getDatabase, ref, set, onValue, push, update, remove} from "firebase/database";
 import { HiTrash } from "react-icons/hi";
 import { MdOutlineModeEdit } from "react-icons/md";
-import { ToastContainer, toast, Zoom } from 'react-toastify';
+import { ToastContainer, toast, Zoom, Bounce } from 'react-toastify';
 import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 
 
@@ -49,6 +49,18 @@ progress: undefined,
 theme: "colored",
 transition: Zoom,
 });
+const edittask = () =>
+  toast.success('🦄 Edit completed!', {
+position: "bottom-center",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: false,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "colored",
+transition: Bounce,
+});
 
 
   const [task, setTask] = useState("")
@@ -89,17 +101,21 @@ transition: Zoom,
 
   const handleEdit =  (id) => {
     const db = getDatabase();
-    update(ref(db, 'TodoName/' + id), { todoname: task }).then(() => setTask(""));
+    update(ref(db, 'TodoName/' + id), { todoname: task }).then(() =>{
+       setTask("")
+      edittask()
+      } )
   }
 
 
   return (
     <>
     <ToastContainer />
-      <h1 className='text-4xl py-10 mb-30 bg-amber-400 text-white text-center '>Todo Application</h1>
-      <form className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 mx-auto">
+      <h1 className='text-4xl py-10 mb-0 bg-amber-400 text-white text-center '>Todo Application</h1>
+      <div className = "bg-[url(./assets/todoPhoto.jpg)] bg-cover bg-no-repeat bg-center h-screen"> 
+      <form className="fieldset bg-offwhite-700 border-offwhite-300 rounded-box w-xs border p-4 mx-auto">
         <fieldset className="fieldset">
-          <label className="text-3xl mb-4">Enter your task here!</label>
+          <label className="text-3xl mb-4 text-black">Enter your task here!</label>
           <input value={task} onChange={(e) => setTask(e.target.value)} type="text" className="input validator" placeholder="Email" required />
           <p className="validator-hint hidden">Required</p>
         </fieldset>
@@ -117,6 +133,7 @@ transition: Zoom,
           ))}
         </ul>
       </form>
+      </div>
     </>
   )
 }
