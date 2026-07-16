@@ -117,7 +117,7 @@ transition: Bounce,
         <fieldset className="fieldset">
           <label className="text-3xl mb-4 text-black">Enter your task here!</label>
           <input value={task} onChange={(e) => setTask(e.target.value)} type="text" className="input validator bg-pink-100 text-pink-500" placeholder="Email" required />
-          <p className="validator-hint hidden">Required</p>
+          <p className="validator-hint hidden text-black text-4xl">Required</p>
         </fieldset>
  
         <button onClick={handleClick} className="btn btn-neutral bg-pink bg-pink-100 hover:bg-pink-500 hover:text-black text-pink-500
